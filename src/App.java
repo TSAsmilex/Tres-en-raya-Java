@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,7 +11,6 @@ public class App {
         var firstPlayerStarts = (new Random()).nextBoolean();
         var player1 = firstPlayerStarts? Options.X : Options.O;
         var player2 = firstPlayerStarts? Options.O : Options.X;
-
 
         var players = new Options[] {player1, player2};
         var current = 0;
@@ -29,12 +29,17 @@ public class App {
 
             int i = -1, j = -1;
 
-            do {
-                i = scan.nextInt();
-                j = scan.nextInt();
-            } while (!game.put(i-1, j-1, players[current]));
+            try {
+                do {
+                    i = scan.nextInt();
+                    j = scan.nextInt();
+                } while (!game.put(i-1, j-1, players[current]));
 
-            current = (current + 1) % 2;
+                current = (current + 1) % 2;
+            }
+            catch (InputMismatchException e) {
+                scan.nextLine();
+            }
         }
 
         scan.close();
