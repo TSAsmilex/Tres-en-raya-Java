@@ -87,24 +87,19 @@ public class Board {
 
     @Override
     public String toString() {
-        String result = "  1 2 3\n";
+        String result = "\t    1 2 3\n\t  +-------+\n";
 
         for (int i = 0; i < board.size(); i++) {
             var line = board.get(i);
-            result += i+1 + " ";
+            result += "\t" + (i+1) + " | ";
 
             for (var item: line) {
-
-                switch (item) {
-                    case X -> result += "X";
-                    case O -> result += "O";
-                    case BLANK -> result += "_";
-                }
-                result += " ";
+                result += item.toString() + " ";
             }
-            result += "\n";
+            result += "|\n";
         }
 
+        result += "\t  +-------+\n";
         return result;
     }
 }
